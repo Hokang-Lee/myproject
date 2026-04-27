@@ -1,0 +1,6 @@
+# Build artifacts
+bin/
+*.o
+
+# Misc
+myproject/

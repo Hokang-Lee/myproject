@@ -1,34 +1,30 @@
 # Compiler
-CC      ?= gcc14
-CFLAGS  ?= -Wall -Wextra -O2 -std=c17
+CC ?= gcc14
+CFLAGS ?= -Wall -Wextra -O2 -std=c17
 
 # Directories
-SRCDIR  := src
-INCDIR  := include
-BINDIR  := bin
+SRCDIR = src
+INCDIR = include
+BINDIR = bin
 
 # Target
-TARGET  := myproject
+TARGET = myproject
 
 # Sources
-SRCS    := $(SRCDIR)/main.c
-OBJS    := $(SRCS:.c=.o)
+SRCS = ${SRCDIR}/main.c
+OBJS = ${SRCS:.c=.o}
 
-# Default target
-all: $(BINDIR)/$(TARGET)
+all: ${BINDIR}/${TARGET}
 
-# Link
-$(BINDIR)/$(TARGET): $(OBJS)
-    mkdir -p $(BINDIR)
-    $(CC) $(CFLAGS) -I$(INCDIR) $^ -o $@
+${BINDIR}/${TARGET}: ${OBJS}
+	@mkdir -p ${BINDIR}
+	${CC} ${CFLAGS} -I${INCDIR} ${OBJS} -o ${BINDIR}/${TARGET}
 
-# Compile
-%.o: %.c
-    $(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+.c.o:
+	${CC} ${CFLAGS} -I${INCDIR} -c $< -o $@
 
-# Clean
 clean:
-    rm -f $(OBJS)
-    rm -rf $(BINDIR)
+	rm -f ${OBJS}
+	rm -rf ${BINDIR}
 
 .PHONY: all clean
